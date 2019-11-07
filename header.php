@@ -30,7 +30,7 @@ if(session_id() == '' || !isset($_SESSION)){session_start();}
           <li><a href="about.php">About Us</a></li>
           <li><a href="products.php">Our Products</a></li>
             <?php 
-                 if ($_SESSION["type"] == "user"){
+                 if (isset($_SESSION["type"])){
                     echo '<li><a href="cart.php">View Cart</a></li>
                     <li><a href="orders.php">My Orders</a></li>';           
                  }

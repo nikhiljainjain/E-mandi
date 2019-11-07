@@ -29,7 +29,7 @@ include 'config.php';
               echo '<p style="text-align:center"><strong>Price (Per Kg)</strong>: '.$currency.$obj->price.'</p>';
 
                 
-            if ($_SESSION["type"] == "user"){
+            if (!isset($_SESSION["type"]) || ($_SESSION["type"] == "user")){
                 if($obj->qty > 0){
                     echo '<p style="text-align:center"><a href="update-cart.php?action=add&id='.$obj->id.'"><input type="submit" value="Add To Cart" style="clear:both; background: #0078A0; border: none; color: #fff; font-size: 1em; padding: 10px;" /></a></p>';
                   }
