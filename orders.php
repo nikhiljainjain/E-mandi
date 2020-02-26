@@ -16,8 +16,15 @@ include 'config.php';
         <hr>
 
         <?php
-          $user = $_SESSION["username"];
-          $result = $mysqli->query("SELECT * from orders where email='".$user."'");
+          
+          $result = null;
+          if ($_SESSION["type"] == "user"){
+                $user = $_SESSION["username"];
+                $result = $mysqli->query("SELECT * from orders where email='".$user."'");
+          }else {
+              $result = $mysqli->query("SELECT * FROM ORDERS");
+          }
+          
           if($result) {
             while($obj = $result->fetch_object()) {
               //echo '<div class="large-6">';
@@ -28,6 +35,7 @@ include 'config.php';
               echo '<p><strong>Price Per Unit</strong>: '.$obj->price.'</p>';
               echo '<p><strong>Units Bought</strong>: '.$obj->units.'</p>';
               echo '<p><strong>Total Cost</strong>: '.$currency.$obj->total.'</p>';
+              if ($_SESSION["type"] == "admin") echo '<p><strong>Customer Email Id</strong>: '.$obj->email.'</p>';
               //echo '</div>';
               //echo '<div class="large-6">';
               //echo '<img src="images/products/sports_band.jpg">';

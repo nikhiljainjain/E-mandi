@@ -27,26 +27,28 @@ if(session_id() == '' || !isset($_SESSION)){session_start();}
       <section class="top-bar-section">
       <!-- Right Nav Section -->
         <ul class="right">
-          <li><a href="about.php">About Us</a></li>
+            <li><a href="index.php">Home</a></li>
+          
           <li><a href="products.php">Our Products</a></li>
             <?php 
                  if (isset($_SESSION["type"])){
-                    echo '<li><a href="cart.php">View Cart</a></li>
-                    <li><a href="orders.php">My Orders</a></li>';           
+                    if ($_SESSION["type"] == "user"){
+                     echo '<li><a href="cart.php">View Cart</a></li><li><a href="orders.php">My Orders</a></li>';   
+                        echo '<li><a href="account.php">Account Details</a></li>';
+                    }
+                    else if ($_SESSION["type"] == "admin"){
+                     echo '<li><a href="orders.php">Orders</a></li>';   
+                        echo '<li><a href="account.php">Edit Products</a></li>';
+                    }
+                     echo '<li><a href="logout.php">Log Out</a></li>';
                  }
-            ?>    
-          <li><a href="contact.php">Contact</a></li>
-          <?php
-
-          if(isset($_SESSION['username'])){
-            echo '<li><a href="account.php">Edit Products</a></li>';
-            echo '<li><a href="logout.php">Log Out <small>( '. $_SESSION["fname"] .' )</small></a></li>';
-          }
           else{
             echo '<li><a href="login.php">Log In</a></li>';
             echo '<li><a href="register.php">Register</a></li>';
           }
           ?>
+            <li><a href="contact.php">Contact</a></li>
+            <li><a href="about.php">About Us</a></li>
         </ul>
       </section>
     </nav>
